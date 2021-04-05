@@ -52,15 +52,60 @@ show grants for 'venda'@'localhost';
 insert into cliente(email, nome, telefone, endereco)
 values ("j@g.com","joaquim", "3599885544","rua b, 42");
 
+insert into cliente(email, nome, telefone, endereco)
+values ("jose@g.com","José Silva", "3599887744","Rua das Flores, 66"),
+("joaquinaalves@m.com","Joaquina ALves", "35988774411","Rua dos rios, 33");
+
 update cliente set nome = "Joaquim Silva" where email = "j@g.com";
 
 delete from cliente where email = "b@g.com";
 delete from produto;
 
+insert into venda (email_cliente, nome_produto, quantidade) 
+values ("j@g.com", "Banana", 2),
+("j@g.com", "Banana", 2),
+("joaquinaalves@m.com", "Banana", 3),
+("jose@g.com", "Banana", 1);
+
+insert into venda (email_cliente, nome_produto, quantidade) 
+values ("joaquinaalves@m.com", "Banana", 2),
+("joaquinaalves@m.com", "Banana", 3);
+
 #DQL - comando de busca
-select nome,telefone from cliente;
+# 1) Dado o e-mail do cliente, como que eu sei quantas compras ele fez?
+
+select count(*) as quantidade_compras from venda where email_cliente = "j@g.com";
+
+# 2) Como que eu sei quantas compras cada cliente fez?
+# 2.1) Como eu recupero nome de todos os clientes cadastrados?
+select nome from cliente;
+
+# 2.2) Como que eu sei quantas compras cada um desses clientes fez?
+select cliente.nome as cliente_nome, count(*) as quantidade_compras 
+from venda inner join cliente
+on venda.email_cliente = cliente.email
+group by cliente.email
+order by quantidade_compras desc;
+
+#3) Como eu encapsulo essa query complexa em uma view?
+create or replace view vw_rank as
+select cliente.nome as cliente_nome, count(*) as quantidade_compras 
+from venda inner join cliente
+on venda.email_cliente = cliente.email
+group by cliente.email
+order by quantidade_compras desc;
+
+select * from vw_rank;
+
+#4) Como eu crio um usuário de banco de dados que tem acesso apenas a essa view?
+create user 'rank'@'localhost';
+show grants for 'rank'@'localhost';
+grant select on loja_alpha.vw_rank to 'rank'@'localhost';
+
+#--------------------------------------------------------------
 
 select * from produto;
+select * from cliente;
 select * from pedido where email_cliente = "j@g.com";
 
 SELECT nome, preco, quantidade FROM produto WHERE quantidade > 0;

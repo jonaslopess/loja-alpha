@@ -1,6 +1,6 @@
 <?php 
 
-$mysqli = new mysqli('localhost', 'estoque', '*ALPHAestoque2225', 'loja_alpha');
+$mysqli = new mysqli('localhost', 'rank', '', 'loja_alpha');
 
 if ($mysqli->connect_errno) {
 
