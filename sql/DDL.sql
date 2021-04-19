@@ -110,5 +110,5 @@ select * from pedido where email_cliente = "j@g.com";
 
 SELECT nome, preco, quantidade FROM produto WHERE quantidade > 0;
 
-update produto set quantidade = o where nome = "Banana";
+update produto set quantidade = 0 where nome = "Banana";
 

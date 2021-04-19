@@ -13,6 +13,8 @@
     require_once 'connection.php';
     require_once 'header.php';
 
+    $mysqli = connect('estoque', '*ALPHAestoque2225', 'loja_alpha');
+
     echo "<div class='conteudo'> <h2>Produtos</h2>";
 
     $sql = "SELECT nome, preco, quantidade FROM produto WHERE quantidade > 0";

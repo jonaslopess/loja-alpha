@@ -8,4 +8,5 @@
 .formulario{
     padding: 20px;
     font: 16 normal Arial;
+    display: block;
 }

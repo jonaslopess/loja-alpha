@@ -13,6 +13,8 @@
     require_once 'connection.php';
     require_once 'header.php';
 
+    $mysqli = connect('rank', '', 'loja_alpha');
+
     echo "<div class='conteudo'> <h2>Rank de Compradores</h2>";
 
     $sql = "SELECT * FROM vw_rank";

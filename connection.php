@@ -1,11 +1,12 @@
 <?php 
 
-$mysqli = new mysqli('localhost', 'rank', '', 'loja_alpha');
+function connect($user, $pass, $database){
+    $mysqli = new mysqli('localhost', $user, $pass, $database);
 
-if ($mysqli->connect_errno) {
-
-    echo "Desculpe, aconteceu algum erro na conexão. :(";
-    exit;
+    if ($mysqli->connect_errno) {
+        return false;
+    }
+    return $mysqli;
 }
 
 ?>

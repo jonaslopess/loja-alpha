@@ -12,6 +12,8 @@
     require_once 'connection.php';
     require_once 'header.php';
 
+    $mysqli = connect('estoque', '*ALPHAestoque2225', 'loja_alpha');
+
     function insert($mysqli, $name, $price, $amount){
         $sql = "INSERT INTO produto (nome, preco, quantidade) values ('$name', '$price', '$amount')";
 
